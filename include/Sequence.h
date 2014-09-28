@@ -1,3 +1,5 @@
+#ifndef QQIBROW_DISRUPTOR_SEQUENCE
+#define QQIBROW_DISRUPTOR_SEQUENCE
 #include <boost/atomic.hpp>
 
 namespace qqibrow {
@@ -19,3 +21,4 @@ class Sequence {
 }  // namespace Disruptor
 }
 
+#endif
