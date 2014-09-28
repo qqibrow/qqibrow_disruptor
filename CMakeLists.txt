@@ -17,7 +17,7 @@ set(CMAKE_CXX_FLAGS "-g -Wall")
 # Normal Libraries & Executables
 ################################
 set(library_name qqibrow_disruptor)
-set(boost ~/boost_1_56_0/)
+#set(boost ~/boost_1_56_0/)
 add_subdirectory(src)
 # Key idea: SEPARATE OUT your main() function into its own file so it can be its
 # own executable. Separating out main() means you can add this library to be
