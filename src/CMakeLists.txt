@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
+set(CMAKE_C_COMPILER clang)
+set(CMAKE_CXX_COMPILER clang++)
+set(CMAKE_CXX_FLAGS "-g -Wall -std=c++11 ")
 
 INCLUDE_DIRECTORIES(~/boost_1_56_0)
 INCLUDE_DIRECTORIES(../include)
