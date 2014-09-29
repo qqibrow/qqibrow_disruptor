@@ -2,15 +2,13 @@
 #define QQIBROW_DISRUPTOR_SEQUENCER
 #include <boost/shared_ptr.hpp>
 #include <vector>
+#include "WaitStrategy.h"
 #include "./Sequence.h"
 
 namespace qqibrow {
 namespace Disruptor {
 
-typedef int WaitStrategy;
 typedef boost::shared_ptr<Sequence> SequencePtr;
-typedef int SequenceBarrier;
-
 class Sequencer {
    public:
     Sequencer(int bufferSize, WaitStrategy* strategy);
@@ -20,7 +18,7 @@ class Sequencer {
     void RemoveGatingSequence(Sequence* sequence);
     long GetMinimumSequence() const;
     // TODO(qqibrow) Refactor this to use a Builder Pattern.
-    SequenceBarrier NewBarrier(Sequence sequenceToTrack);
+    SequenceBarrier* NewBarrier(Sequence sequenceToTrack);
 
    protected:
     const int bufferSize_;
