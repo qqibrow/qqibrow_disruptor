@@ -6,6 +6,7 @@
 namespace qqibrow {
 namespace Disruptor {
 class WaitStrategy {
+    public:
     virtual long WaitFor(long sequence, const Sequence& cursor,
                  const Sequence& dependentSequence,
                  const SequenceBarrier& barrier) = 0;

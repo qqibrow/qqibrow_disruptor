@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 # Options. Turn on with 'cmake -Dmyvarname=ON'.
 option(test "Build all tests." OFF) # Makes boolean 'test' available.
+set(CMAKE_CXX_FLAGS "-g -Wall -std=c++11 -stdlib=libc++")
 
 # Make PROJECT_SOURCE_DIR, PROJECT_BINARY_DIR, and PROJECT_NAME available.
 set(PROJECT_NAME Disruptor)
@@ -27,7 +28,7 @@ add_subdirectory(src)
 ################################
 if (test)
   # This adds another subdirectory, which has 'project(gtest)'.
-  add_subdirectory(lib/gtest-1.6.0)
+  add_subdirectory(lib/gtest-1.7.0)
 
   enable_testing()
 
