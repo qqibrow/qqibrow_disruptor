@@ -3,12 +3,14 @@
 #include <boost/shared_ptr.hpp>
 #include <vector>
 #include "WaitStrategy.h"
+#include "SequenceBarrier.h"
 #include "./Sequence.h"
 
 namespace qqibrow {
 namespace Disruptor {
 
 typedef boost::shared_ptr<Sequence> SequencePtr;
+    typedef std::vector<SequencePtr> SequenceCollector;
 class Sequencer {
    public:
     Sequencer(int bufferSize, WaitStrategy* strategy);
@@ -36,7 +38,7 @@ class Sequencer {
     const int bufferSize_;
     const boost::shared_ptr<WaitStrategy> waitStrategy_;
     Sequence cursor_;
-    std::vector<SequencePtr> gatingSequences_;
+    SequenceCollector gatingSequences_;
 };
 }  // namespace Disruptor
 }  // namespace qqibrow

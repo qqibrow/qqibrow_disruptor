@@ -17,6 +17,7 @@ class SingleProducerSequencer : public Sequencer {
     virtual void Publish(long lo, long hi);
     virtual bool IsAvailable(long sequence);
     virtual long GetHighestPublishedSequence(long lowBound, long availableSequence);
+    virtual ~SingleProducerSequencer() {}
 
    private:
     long nextValue_;

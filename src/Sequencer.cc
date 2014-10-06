@@ -23,5 +23,7 @@ void Sequencer::RemoveGatingSequence(Sequence* sequence) {
         [&sequence](const SequencePtr& ptr) { return ptr.get() == sequence; });
 }
 long Sequencer::GetMinimumSequence() const { return 0; }
-SequenceBarrier* Sequencer::NewBarrier(Sequence sequenceToTrack) { return NULL; }
+SequenceBarrier* Sequencer::NewBarrier(Sequence sequenceToTrack) {
+    return new SequenceBarrier(this, waitStrategy_, gatingSequences_);
+}
 

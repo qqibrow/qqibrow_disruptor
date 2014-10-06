@@ -1,6 +1,6 @@
 #ifndef QQIBROW_DISRUPTOR_UTIL
 #define QQIBROW_DISRUPTOR_UTIL
-#include "Sequence.h"
+#include "Sequencer.h"
 #include <algorithm>
 #include <vector>
 
