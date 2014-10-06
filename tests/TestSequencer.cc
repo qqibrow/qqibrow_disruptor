@@ -60,11 +60,11 @@ TEST_F(TestSequencer, ShouldBlockingWhenBufferIsFull) {
     wait1.store(false, boost::memory_order_relaxed);
     wait2.store(false, boost::memory_order_relaxed);
     std::thread th([&]() {
-            wait1.store(true, boost::memory_order_release);
-            long next = sequencer->Next();
-            sequencer->Publish(next);
-            wait2.store(true, boost::memory_order_release);
-            });
+        wait1.store(true, boost::memory_order_release);
+        long next = sequencer->Next();
+        sequencer->Publish(next);
+        wait2.store(true, boost::memory_order_release);
+    });
     while (!wait1.load(boost::memory_order_acquire))
         ;
     EXPECT_EQ(-1 + TestSequencer::BUFFER_SIZE, sequencer->GetCursor());
@@ -74,6 +74,27 @@ TEST_F(TestSequencer, ShouldBlockingWhenBufferIsFull) {
     EXPECT_EQ(TestSequencer::BUFFER_SIZE, sequencer->GetCursor());
 
     th.join();
+}
 
+TEST_F(TestSequencer, ShouldCalculateRemainingCapacity) {
+    Sequence* gating = new Sequence();
+    sequencer->AddGatingSequence(gating);
+    EXPECT_EQ(sequencer->GetRemainingCapacity(), BUFFER_SIZE);
+    for (int i = 1; i < TestSequencer::BUFFER_SIZE; ++i) {
+        sequencer->Next();
+        EXPECT_EQ(sequencer->GetRemainingCapacity(), BUFFER_SIZE - i);
+    }
+}
+
+TEST_F(TestSequencer, ShouldNotBeAvailableUntilPublish) {
+    long next = sequencer->Next(10);
+    for (int i = 0; i <= next; ++i) {
+        EXPECT_FALSE(sequencer->IsAvailable(i));
+    }
+    sequencer->Publish(next - (10 - 1), next);
+    for (int i = 0; i <= next; ++i) {
+        EXPECT_TRUE(sequencer->IsAvailable(i));
+    }
+    EXPECT_FALSE(sequencer->IsAvailable(10));
 }
 
