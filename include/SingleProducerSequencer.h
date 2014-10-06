@@ -19,8 +19,8 @@ class SingleProducerSequencer : public Sequencer {
     long GetHighestPublishedSequence(long lowBound, long availableSequence);
 
    private:
-    long nextValue;
-    long cachedValue;
+    long nextValue_;
+    long cachedValue_;
 
 };
 
