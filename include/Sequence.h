@@ -14,6 +14,7 @@ class Sequence {
     long IncrementAndGet();
     long AddAndGet(const long& increment);
 
+
    private:
     boost::atomic<long> value_;
     static const long INITIAL_VALUE;

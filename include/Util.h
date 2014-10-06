@@ -15,9 +15,14 @@ class Util {
    public:
     static long GetMinSequence(const std::vector<SequencePtr>& gatingSequences,
                                long sequence) {
-        const SequencePtr& ptr = *std::min_element(gatingSequences.begin(), gatingSequences.end(),
-                             CompareSequencePtr());
-        return (std::min)(sequence,ptr->Get());
+        if (gatingSequences.empty()) {
+            return sequence;
+        } else {
+            const SequencePtr& ptr =
+                *std::min_element(gatingSequences.begin(),
+                                  gatingSequences.end(), CompareSequencePtr());
+            return (std::min)(sequence, ptr->Get());
+        }
     }
 };
 }
