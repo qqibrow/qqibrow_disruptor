@@ -23,7 +23,7 @@ class Sequencer {
    protected:
     const int bufferSize_;
     const boost::shared_ptr<WaitStrategy> waitStrategy_;
-    const Sequence cursor_;
+    Sequence cursor_;
     std::vector<SequencePtr> gatingSequences_;
 };
 }  // namespace Disruptor
