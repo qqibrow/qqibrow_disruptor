@@ -1,4 +1,5 @@
 #include "Sequencer.h"
+#include "SequenceBarrier.h"
 #include <assert.h>
 using namespace qqibrow::Disruptor;
 using namespace boost;
@@ -24,6 +25,6 @@ void Sequencer::RemoveGatingSequence(Sequence* sequence) {
 }
 long Sequencer::GetMinimumSequence() const { return 0; }
 SequenceBarrier* Sequencer::NewBarrier(Sequence sequenceToTrack) {
-    return new SequenceBarrier(this, waitStrategy_, gatingSequences_);
+    return new SequenceBarrier(this, waitStrategy_.get(), gatingSequences_);
 }
 

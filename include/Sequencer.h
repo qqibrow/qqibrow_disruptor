@@ -3,7 +3,6 @@
 #include <boost/shared_ptr.hpp>
 #include <vector>
 #include "WaitStrategy.h"
-#include "SequenceBarrier.h"
 #include "./Sequence.h"
 
 namespace qqibrow {

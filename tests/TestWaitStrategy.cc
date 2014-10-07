@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "SleepingWaitStrategy.h"
+#include "SequenceBarrier.h"
 #include <thread>
 #include <mutex>
 #include <boost/scoped_ptr.hpp>
@@ -21,10 +22,10 @@ TEST_F(TestWaitStrategy, ShouldWaitFordependentSequence) {
     Sequence depdent(0);
     int steps = 100;
     Sequence cursor(steps);
-    SequenceBarrier barrier;
+    boost::scoped_ptr<SequenceBarrier> barrier(new SequenceBarrier());
     long result;
     std::thread runningWaitStrategy([&]() {
-            result = waitStrategy->WaitFor(steps, cursor, depdent, barrier);
+            result = waitStrategy->WaitFor(steps, cursor, depdent, barrier.get());
             });
     depdent.AddAndGet(steps);
     runningWaitStrategy.join();

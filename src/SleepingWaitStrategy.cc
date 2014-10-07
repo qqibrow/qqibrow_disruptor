@@ -16,7 +16,7 @@ SleepingWaitStrategy::SleepingWaitStrategy()
 
 long SleepingWaitStrategy::WaitFor(long sequence, const Sequence& cursor,
                                    const Sequence& dependentSequence,
-                                   const SequenceBarrier& barrier) {
+                                   const SequenceBarrier* barrier) {
     long availableSequence;
     if ((availableSequence = cursor.Get()) < sequence) {
         unique_lock<mutex> lk(concurrencyUtil_->mtx);

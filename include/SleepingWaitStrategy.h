@@ -10,7 +10,7 @@ class SleepingWaitStrategy : public WaitStrategy {
     SleepingWaitStrategy();
     virtual long WaitFor(long sequence, const Sequence& cursor,
                          const Sequence& dependentSequence,
-                         const SequenceBarrier& barrier);
+                         const SequenceBarrier* barrier);
     virtual void SignalAllWhenBlocking();
    private:
     class ConcurrencyImpl;

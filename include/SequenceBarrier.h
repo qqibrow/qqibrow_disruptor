@@ -6,6 +6,7 @@ namespace qqibrow {
 namespace Disruptor {
 class SequenceBarrier {
    public:
+    SequenceBarrier() {} // Only used for testing.
     SequenceBarrier(Sequencer* sequencer,
                                      const WaitStrategy* strategy,
                                      SequenceCollector& dependentSequences);
